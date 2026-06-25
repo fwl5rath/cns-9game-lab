@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九游 · 查询对照导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f2f4f7;
+            color: #1e1e2a;
+            line-height: 1.6;
+            padding: 30px 20px 60px;
+        }
+
+        .page-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ---------- 顶部导航 ---------- */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 14px 28px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e9ecf0;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            color: #2a3b4c;
+        }
+
+        .nav-link-group {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link-group a {
+            text-decoration: none;
+            color: #3a4b5d;
+            font-size: 0.95rem;
+            font-weight: 450;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            transition: border 0.2s, color 0.2s;
+        }
+
+        .nav-link-group a:hover {
+            color: #1d2b3a;
+            border-bottom-color: #7e8c9e;
+        }
+
+        /* ---------- Hero 简介 ---------- */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 36px;
+            margin-bottom: 40px;
+            border: 1px solid #e2e6ec;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+        }
+
+        .hero-card h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+            color: #1b2838;
+            margin-bottom: 16px;
+        }
+
+        .hero-card p {
+            font-size: 1rem;
+            color: #3b4a5b;
+            max-width: 750px;
+            margin-bottom: 18px;
+        }
+
+        .hero-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hero-card .inline-link {
+            color: #2b5a7a;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #bcc9d6;
+        }
+
+        .hero-card .inline-link:hover {
+            color: #0f2f47;
+            text-decoration-color: #7f98af;
+        }
+
+        /* ---------- 三场景模块 ---------- */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 44px;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 26px 22px 30px;
+            border: 1px solid #e3e7ed;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+
+        .scene-card:hover {
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .scene-card .emoji-marker {
+            font-size: 1.5rem;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .scene-card h3 {
+            font-weight: 500;
+            font-size: 1.15rem;
+            color: #1b2a3c;
+            margin-bottom: 12px;
+            border-left: 3px solid #b5c4d3;
+            padding-left: 12px;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #3b4a5d;
+            line-height: 1.7;
+        }
+
+        .scene-card .sub-note {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: #65768a;
+            background: #f4f6fa;
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+
+        /* ---------- 常见说明 (FAQ 摘要) ---------- */
+        .faq-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 32px 34px;
+            border: 1px solid #e4e8ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            margin-bottom: 36px;
+        }
+
+        .faq-section h2 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #1b2a3b;
+            margin-bottom: 20px;
+            letter-spacing: -0.2px;
+        }
+
+        .faq-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eceff4;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            color: #1b2f42;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .faq-question .q-label {
+            font-size: 0.85rem;
+            background: #e4ebf3;
+            color: #2c4056;
+            padding: 0 10px;
+            border-radius: 20px;
+            font-weight: 450;
+        }
+
+        .faq-answer {
+            color: #364a5e;
+            font-size: 0.95rem;
+            padding-left: 28px;
+            max-width: 800px;
+        }
+
+        .faq-answer a {
+            color: #2b5a7a;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #b0c2d4;
+        }
+
+        .faq-answer a:hover {
+            color: #0e314b;
+            text-decoration-color: #6b86a0;
+        }
+
+        .faq-divider {
+            margin: 6px 0;
+        }
+
+        /* ---------- 底部/脚注 ---------- */
+        .footer-note {
+            text-align: center;
+            padding: 20px 0 10px;
+            color: #6a7b8e;
+            font-size: 0.85rem;
+            border-top: 1px solid #dce1e9;
+            margin-top: 20px;
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 860px) {
+            .scenes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .hero-card h1 {
+                font-size: 1.6rem;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+                padding: 18px 20px;
+            }
+
+            .nav-link-group {
+                gap: 18px;
+            }
+
+            .faq-section {
+                padding: 24px 18px;
+            }
+
+            .hero-card {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 12px 40px;
+            }
+
+            .hero-card h1 {
+                font-size: 1.4rem;
+            }
+
+            .scene-card {
+                padding: 20px 16px;
+            }
+
+            .faq-answer {
+                padding-left: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <span class="nav-brand">📋 查询 · 对照 · 延伸</span>
+        <div class="nav-link-group">
+            <a href="#scene-daily">日常查询</a>
+            <a href="#scene-compare">对照参考</a>
+            <a href="#scene-extend">延伸阅读</a>
+            <a href="#faq-section">常见说明</a>
+        </div>
+    </nav>
+
+    <!-- Hero 核心介绍 -->
+    <div class="hero-card">
+        <h1>关于九游 · 信息整理</h1>
+        <p>
+            本页围绕 <strong><a href="https://cns-9game.com.cn" class="inline-link">九游</a></strong> 
+            的主题，整理日常查询中较常涉及的内容脉络。从基础介绍出发，汇总可对照的要点，
+            并为有延伸需求的读者提供几个可参考的模块。所有信息均保持平实、可查证，
+            不包含未经核实的推测或诱导性描述。
+        </p>
+        <p>
+            你可以将本页视为一个轻量的信息索引卡——按需浏览，也可以随时回到 
+            <a href="https://cns-9game.com.cn" class="inline-link">九游</a> 
+            查看更完整的上下文。页面内容保持克制，只做筛选与陈列。
+        </p>
+    </div>
+
+    <!-- 三场景模块 (日常查询/对照/延伸) -->
+    <div class="scenes-grid" id="scene-daily">
+        <div class="scene-card">
+            <div class="emoji-marker">🔍</div>
+            <h3>日常查询</h3>
+            <p>
+                快速检索与九游相关的基础信息，例如类别说明、常见条目释义、版本沿革等。
+                适合在浏览过程中随时对照确认，避免信息混淆。
+            </p>
+            <div class="sub-note">
+                可配合关键词筛选，缩小查找范围。
+            </div>
+        </div>
+        <div class="scene-card" id="scene-compare">
+            <div class="emoji-marker">📊</div>
+            <h3>对照参考</h3>
+            <p>
+                并排陈列对比项，涵盖功能差异、分类归属、时期变化等维度。
+                通过表格化或结构化摘要，帮助读者快速把握不同条目之间的异同。
+            </p>
+            <div class="sub-note">
+                对比范围保持客观，仅陈列可验证信息。
+            </div>
+        </div>
+        <div class="scene-card" id="scene-extend">
+            <div class="emoji-marker">📎</div>
+            <h3>延伸阅读</h3>
+            <p>
+                收录与九游主题相关的背景资料、关联说明以及进一步了解的线索。
+                适合在完成基础查询后，按兴趣方向做适度扩展。
+            </p>
+            <div class="sub-note">
+                延伸内容均标注来源属性，不添加主观引申。
+            </div>
+        </div>
+    </div>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <div class="faq-section" id="faq-section">
+        <h2>📌 常见说明 · 摘要</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="q-label">Q1</span>  
+                九游主要涵盖哪些内容？
+            </div>
+            <div class="faq-answer">
+                涵盖范围以平台自身定义为准，通常包括信息展示、分类索引及关联服务。
+                具体分类边界建议直接参考 
+                <a href="https://cns-9game.com.cn">九游</a> 
+                的分类导航或说明文档。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="q-label">Q2</span>  
+                如何快速找到需要的对照条目？
+            </div>
+            <div class="faq-answer">
+                可利用页面中的「日常查询」和「对照参考」卡位进行初步筛选，
+                如需更细的对照视图，可以回到 
+                <a href="https://cns-9game.com.cn">九游</a> 
+                使用平台自带的检索功能。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="q-label">Q3</span>  
+                延伸阅读的素材来源是否可靠？
+            </div>
+            <div class="faq-answer">
+                延伸模块仅陈列素材名称与属性，不直接提供第三方链接。
+                所有延伸素材均标注了所属类别或参考范围，读者可自行依据标注回溯查证。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span class="q-label">Q4</span>  
+                页面会频繁更新吗？
+            </div>
+            <div class="faq-answer">
+                本页为静态导航型摘要，更新节奏视主题变化而定。
+                建议以 <a href="https://cns-9game.com.cn">九游</a> 
+                上的实时内容为准。
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        此页面为轻量导航说明页 · 内容按日常查询、对照、延伸三类组织 ·
+        供读者快速索引
+    </div>
+
+</div>
+</body>
+</html>
